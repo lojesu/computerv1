@@ -29,7 +29,7 @@ def right_associativity(operator):
 
 
 """
-shunting-yard algo application, this is for do some calcul
+shunting-yard algo application, this is for convert in "reverse polish"
 """
 def shunting_yard(calcul):
     output = ""
@@ -55,6 +55,9 @@ def shunting_yard(calcul):
         elif token == "(":
             operator_stack += token
         elif token == ")":
+            if "(" not in operator_stack:
+                print("there are mismatched parenthses")
+                quit()
             for operator in operator_stack[::-1]:
                 if operator == "(":
                     operator_stack = operator_stack[:-1]
@@ -62,6 +65,9 @@ def shunting_yard(calcul):
                 elif operator != "(":
                     output += operator + " "
                     operator_stack = operator_stack[:-1]
+    if "(" in operator_stack or ")" in operator_stack:
+        print("there are mismatched parenthses")
+        quit()
     for operator in operator_stack[::-1]:
         output += operator + " "
         operator_stack = operator_stack[:-1]
@@ -71,4 +77,4 @@ def shunting_yard(calcul):
 
 
 
-print(shunting_yard("3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3"))
+print(shunting_yard("3 + 4 * 2 / ( 1 * 5 ) "))
