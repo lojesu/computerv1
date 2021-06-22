@@ -1,10 +1,4 @@
-"""
-this function determinate if a character is an operator or not
-"""
-def is_operator(token):
-    if token == "+" or token == "-" or token =="*" or token == "/" or token == "^":
-        return True
-    return False
+from calcul import is_operator
 
 
 """
