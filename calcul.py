@@ -19,6 +19,7 @@ def precedence_value(operator):
         return 4
     return 0
 
+
 """
 function for define the right operators's associativity
 """
@@ -36,9 +37,6 @@ def shunting_yard(calcul):
     operator_stack = ""
 
     for token in calcul.split():
-        print(output)
-        print(operator_stack)
-        print("---")
         if token.isdigit():
             output += token + " "
         elif is_operator(token):
@@ -71,10 +69,3 @@ def shunting_yard(calcul):
     for operator in operator_stack[::-1]:
         output += operator + " "
         operator_stack = operator_stack[:-1]
-    print(output)
-    print(operator_stack)
-    print("---")
-
-
-
-print(shunting_yard("3 + 4 * 2 / ( 1 * 5 ) "))
