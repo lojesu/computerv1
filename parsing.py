@@ -38,8 +38,17 @@ def parsing(str):
     i = 1
     for token in str_split:
         if i % 2 == 0:
-            if is_operator(token) == False and token != "=":
+            if is_operator(token) == False and token != "=" \
+                or token == "^":
                 print("CONNARD! 5")
+                quit()
+        if i % 2 == 1:
+            if is_operator(token) == True or token == "=":
+                print("CONNARD! 6")
+                quit()
+        if i == len(str_split):
+            if token == "=":
+                print("CONNARD! 7")
                 quit()
         i += 1
     return str
@@ -52,7 +61,12 @@ def formatting(str):
     new_str = ""
     i = 0
     for char in str:
-        if char.isdigit() or char == ".":
+        if char == "-":
+            if str[i + 1].isdigit() or str[i + 1] == "X":
+                new_str += char
+            else:
+                new_str += char + " "
+        elif char.isdigit() or char == ".":
             if  i < len(str) - 1 and (str[i + 1].isdigit() or str[i + 1] == "."):
                 new_str += char
             else:
