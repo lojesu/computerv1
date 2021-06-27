@@ -69,3 +69,4 @@ def shunting_yard(calcul):
     for operator in operator_stack[::-1]:
         output += operator + " "
         operator_stack = operator_stack[:-1]
+    return output
