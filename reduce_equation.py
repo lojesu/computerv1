@@ -2,13 +2,6 @@ from calcul import is_operator
 
 
 """
-this for sort my tuples with the second element
-"""
-def take_second(elem):
-    return elem[1]
-    
-
-"""
 this function is isdigit but better
 """
 def is_number(str):
@@ -33,18 +26,16 @@ def convert_equation_to_tupple(equation):
             equation_split[i + 1] == "*" and\
             equation_split[i + 2][0] == "X":
             new_equation.append((float(token), int(equation_split[i + 2][2:])))
-            i += 3
+            i += 2
         elif is_operator(token) == True:
             new_equation.append(token)
-            i += 1
         elif is_number(token) == True:
             new_equation.append((float(token), 0))
-            i += 1
         elif token[0] == "X":
             new_equation.append((1, token[2:]))
-            i += 1
         else:
             break
+        i += 1
     return new_equation
 
 
@@ -87,6 +78,27 @@ def transfer_all_token_to_the_left_equal(equation):
     return new_equation
 
 
+def reducing_first_step(equation):
+    i = 0
+    while i < len(equation) - 1:
+        if equation[i] == "*":
+            number = float(equation[i - 1][0] * equation[i + 1][0])
+            power = int(equation[i - 1][1] + equation[i + 1][1])
+            equation[i] = (number, power)
+            del(equation[i - 1])
+            del(equation[i])
+            i = 0
+        elif equation[i] == "/":
+            number = float(equation[i - 1][0] / equation[i + 1][0])
+            power = int(equation[i - 1][1] - equation[i + 1][1])
+            equation[i] = (number, power)
+            del(equation[i - 1])
+            del(equation[i])
+            i = 0
+        i += 1
+    return equation
+                
+
 """
 this function reduce the equation for find the result more easily
 """
@@ -94,5 +106,6 @@ def reduce_equation(equation):
     if equation[equation.find("=") + 2] != "0":
         new_equation = transfer_all_token_to_the_left_equal(equation)
     """partie sans le bonus, a ajouter apres"""
-    new_equation = convert_equation_to_tupple(new_equation)
+    new_equation = reducing_first_step(convert_equation_to_tupple(new_equation))
+    
     return new_equation
