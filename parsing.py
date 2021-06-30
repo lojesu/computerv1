@@ -51,7 +51,20 @@ def parsing(str):
                 print("CONNARD! 7")
                 quit()
         i += 1
+    str = Xformatting(str)
     return str
+
+"""
+this function convert X to X^1 for the rest of the code
+"""
+def Xformatting(str):
+    i = 0
+    str_split = str.split()
+    for token in str_split:
+        if token == "X":
+            str_split[i] = "X^1"
+        i += 1
+    return " ".join(str_split)
 
 
 """

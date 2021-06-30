@@ -2,6 +2,7 @@ import sys
 
 from parsing import parsing
 from reduce_equation import reduce_equation
+from determinate_polynomial_degree import determinate_polynomial_degree
 
 
 """
@@ -19,6 +20,8 @@ else:
     print("tk1kon! 2")
     
 reduced_form = reduce_equation(equation)
+polynomial_degree = determinate_polynomial_degree(reduced_form)
 
-print(equation)
+# je dois faire print reduce form correctement
 print(reduced_form)
+print(polynomial_degree)

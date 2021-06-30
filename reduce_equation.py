@@ -1,5 +1,18 @@
 from calcul import is_operator
 
+"""
+return second element of elem
+"""
+def take_second(elem):
+    return elem[1]
+
+
+"""
+return first element of elem
+"""
+def take_first(elem):
+    return elem[0]
+
 
 """
 this function is isdigit but better
@@ -32,7 +45,7 @@ def convert_equation_to_tupple(equation):
         elif is_number(token) == True:
             new_equation.append((float(token), 0))
         elif token[0] == "X":
-            new_equation.append((1, token[2:]))
+            new_equation.append((1, int(token[2:])))
         else:
             break
         i += 1
@@ -56,7 +69,11 @@ def transfer_all_token_to_the_left_equal(equation):
                         new_right_equal += "+ " + str(int(token) * -1)
                     else:
                         new_right_equal += "- " + token
-                else:
+                elif token[0] == "X" or token[1] == "X":
+                    if token[0] == "-":
+                        new_right_equal += "+ "
+                    else:
+                        new_right_equal += "- "
                     new_right_equal += token
             else:
                 if token.isdigit() and \
@@ -77,8 +94,10 @@ def transfer_all_token_to_the_left_equal(equation):
     new_equation = left_equal + new_right_equal + "= 0"
     return new_equation
 
-
-def reducing_first_step(equation):
+"""
+this is the first step of final reduction of equation, i develope all * and /
+"""
+def reduction_first_step(equation):
     i = 0
     while i < len(equation) - 1:
         if equation[i] == "*":
@@ -98,14 +117,41 @@ def reducing_first_step(equation):
         i += 1
     return equation
                 
+"""
+second step, i do + and - at token with the same power
+"""
+def reduction_second_step(equation):
+    i = 0
+    start = 0
+    while start < len(equation) - 1:
+        i = start + 2
+        while take_second(equation[start]) != take_second(equation[i]):
+            i += 2
+            if i > len(equation) - 1:
+                break
+        if i <= len(equation) - 1:
+            if equation[i - 1] == "+":
+                new_number = float(take_first(equation[start])) + float(take_first(equation[i]))
+                equation[start] = (new_number, take_second(equation[start]))
+                del(equation[i])
+                del(equation[i - 1])
+            elif equation[i - 1] == "-":
+                new_number = float(take_first(equation[start])) - float(take_first(equation[i]))
+                equation[start] = (new_number, take_second(equation[start]))
+                del(equation[i])
+                del(equation[i - 1])
+            start -= 2
+        start += 2
+    return equation
+
 
 """
 this function reduce the equation for find the result more easily
 """
 def reduce_equation(equation):
     if equation[equation.find("=") + 2] != "0":
-        new_equation = transfer_all_token_to_the_left_equal(equation)
-    """partie sans le bonus, a ajouter apres"""
-    new_equation = reducing_first_step(convert_equation_to_tupple(new_equation))
-    
+        equation = transfer_all_token_to_the_left_equal(equation)
+    new_equation = convert_equation_to_tupple(equation)
+    new_equation = reduction_first_step(new_equation)
+    new_equation = reduction_second_step(new_equation)
     return new_equation
