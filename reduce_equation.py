@@ -1,4 +1,4 @@
-from calcul import is_operator
+from parsing import is_operator
 
 """
 return second element of elem

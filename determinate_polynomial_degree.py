@@ -10,4 +10,7 @@ def determinate_polynomial_degree(equation):
                 quit()
             if take_second(token) > polynomial_degree:
                 polynomial_degree = take_second(token)
+    if polynomial_degree > 2:
+                print("AHHHHHHHH2 !!!")
+                quit()
     return polynomial_degree

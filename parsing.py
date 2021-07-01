@@ -1,4 +1,10 @@
-from calcul import is_operator
+"""
+function for determinate if the tokken is an operator
+"""
+def is_operator(token):
+    if token == "+" or token == "-" or token =="*" or token == "/" or token == "^":
+        return True
+    return False
 
 
 """
@@ -15,6 +21,7 @@ principal parsing function for computerv1
 """
 def parsing(str):
     str = despace(str)
+    str = str.replace("x", "X")
     if str.count("=") != 1:
             print("CONNARD! 1")
             quit()
@@ -35,16 +42,16 @@ def parsing(str):
 
     str = formatting(str)
     str_split = str.split()
-    i = 1
+    i = 0
     for token in str_split:
         if i % 2 == 0:
+            if is_operator(token) == True or token == "=":
+                print("CONNARD! 6")
+                quit()
+        if i % 2 == 1:
             if is_operator(token) == False and token != "=" \
                 or token == "^":
                 print("CONNARD! 5")
-                quit()
-        if i % 2 == 1:
-            if is_operator(token) == True or token == "=":
-                print("CONNARD! 6")
                 quit()
         if i == len(str_split):
             if token == "=":
@@ -85,7 +92,7 @@ def formatting(str):
             else:
                 new_str += char + " "
         elif char != " ":
-            if char == "X" or (char == "^" and i > 1 and str[i - 1] == "X" or str[i - 2] == "X"):
+            if (char == "X" and (i < len(str) - 2 and (str[i + 1] == "^" or (str[i + 1] == " " and str[i + 2] == "^")))) or (char == "^" and (str[i - 1] == "X" or (str[i - 1] == " " and str[i - 2] == "X"))):
                 if i < len(str) - 2 and (str[i + 1] == "=" \
                     or (str[i + 2] == "=" and str[i + 1] == " ")):
                     new_str += char + " "
