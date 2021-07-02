@@ -122,6 +122,13 @@ second step, i do + and - at token with the same power
 """
 def reduction_second_step(equation):
     i = 0
+    for token in equation:
+        if type(token) == tuple:
+            if take_first(token) == 0:
+                equation[i] = (0, 0)
+                i -= 1
+        i += 1
+    i = 0
     start = 0
     while start < len(equation) - 1:
         i = start + 2

@@ -27,6 +27,30 @@ def assign_values(equation):
 
 
 """
+we just parse request user and we answer correctly
+"""
+def resolve_degree_0(equation, equation_parsing):
+    a, b, c = assign_values(equation)
+    if c == 0 and equation_parsing.count("X") > 0:
+        print("All real number is a solution for this equation")
+    elif c == 0 and equation_parsing.count("X") == 0:
+        print("Your equality is true")
+    elif c != 0 and equation_parsing.count("X") > 0:
+        print("Your equation is unsolvable with real number")
+    else:
+        print("Your equality is FALSE !!")
+
+
+"""
+we isolate the X unknow and we split his factor to get a result
+"""
+def resolve_degree_1(equation):
+    a, b, c = assign_values(equation)
+    solution = -1 * c / b
+    print("Solution is :", solution)
+
+
+"""
 we apply stupidly the formules and calculate solution(s)
 """
 def resolve_degree_2(equation):

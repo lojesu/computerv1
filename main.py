@@ -3,7 +3,11 @@ import sys
 from parsing import parsing
 from reduce_equation import reduce_equation
 from determinate_polynomial_degree import determinate_polynomial_degree
-from resolve_degree_2 import resolve_degree_2
+from resolve_equation import (
+    resolve_degree_0,
+    resolve_degree_1,
+    resolve_degree_2
+)
 
 
 """
@@ -29,3 +33,7 @@ print("Polynomial degre :", polynomial_degree)
 
 if polynomial_degree == 2:
     resolve_degree_2(reduced_form)
+elif polynomial_degree == 1:
+    resolve_degree_1(reduced_form)
+elif polynomial_degree == 0:
+    resolve_degree_0(reduced_form, equation)
