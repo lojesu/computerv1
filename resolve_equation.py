@@ -58,11 +58,13 @@ def resolve_degree_2(equation):
     delta = float(-4 * a * c)
     print("Delta is :", delta)
     if delta < 0:
-        print("po trouve")
+        print("Delta is strictly negative so there is no solution")
     elif delta == 0:
         solution = -b / (2 * a)
-        print("Solution is :", solution)
+        print("Delta is null")
+        print("The solution is :", solution)
     else:
         s1 = (-b - delta ** 0.5) / 2
         s2 = (-b + delta ** 0.5) / 2
+        print("Delta is strictly positive")
         print("The two solutions are :", s1, "and", s2)
