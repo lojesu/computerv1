@@ -38,14 +38,14 @@ def convert_equation_to_tupple(equation):
         if is_number(token) == True and i < len(equation_split) - 2 and\
             equation_split[i + 1] == "*" and\
             equation_split[i + 2][0] == "X":
-            new_equation.append((float(token), int(equation_split[i + 2][2:])))
+            new_equation.append((float(token), float(equation_split[i + 2][2:])))
             i += 2
         elif is_operator(token) == True:
             new_equation.append(token)
         elif is_number(token) == True:
             new_equation.append((float(token), 0))
         elif token[0] == "X":
-            new_equation.append((1, int(token[2:])))
+            new_equation.append((1, float(token[2:])))
         else:
             break
         i += 1
@@ -102,14 +102,18 @@ def reduction_first_step(equation):
     while i < len(equation) - 1:
         if equation[i] == "*":
             number = float(equation[i - 1][0] * equation[i + 1][0])
-            power = int(equation[i - 1][1] + equation[i + 1][1])
+            power = float(equation[i - 1][1] + equation[i + 1][1])
             equation[i] = (number, power)
             del(equation[i - 1])
             del(equation[i])
             i = 0
         elif equation[i] == "/":
-            number = float(equation[i - 1][0] / equation[i + 1][0])
-            power = int(equation[i - 1][1] - equation[i + 1][1])
+            try:
+                number = float(equation[i - 1][0] / equation[i + 1][0])
+            except:
+                print("we get a division per zero, it makes no sense in mathematiques")
+                quit()
+            power = float(equation[i - 1][1] - equation[i + 1][1])
             equation[i] = (number, power)
             del(equation[i - 1])
             del(equation[i])
@@ -149,6 +153,12 @@ def reduction_second_step(equation):
                 del(equation[i - 1])
             start -= 2
         start += 2
+    i = 0
+    for token in equation:
+        if take_first(token) == 0 and take_second(token) == 0:
+            del(equation[i])
+            del(equation[i])
+        i += 1
     return equation
 
 

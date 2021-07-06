@@ -43,14 +43,17 @@ polynomial_degree = determinate_polynomial_degree(reduced_form)
 reduced_form_print = ""
 for token in reduced_form:
     if type(token) == tuple:
+        if token[1] % 1 != 0:
+            print("we don't resolve equation with non integer power'")
+            quit()
         if int(token[0]) == 1:
-            reduced_form_print += "X^" + str(token[1]) + " "
+            reduced_form_print += "X^" + str(int(token[1])) + " "
         else:
-            reduced_form_print += str(token[0]) + " * X^" + str(token[1]) + " "
+            reduced_form_print += str(token[0]) + " * X^" + str(int(token[1])) + " "
     else:
         reduced_form_print += token + " "
 if "n" in sys.argv[1]:
-    reduced_form_print = reduced_form_print.replace("* X^0", "")
+    reduced_form_print = reduced_form_print.replace(" * X^0", "")
     reduced_form_print = reduced_form_print.replace("X^1", "X")
 reduced_form_print += "= 0"
 

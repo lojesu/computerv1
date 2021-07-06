@@ -58,6 +58,9 @@ def parsing(str):
                 print("CONNARD! 7")
                 quit()
         i += 1
+    if str_split[i - 1] == "=":
+        print("CONNARD! 8")
+        quit()
     str = Xformatting(str)
     return str
 
