@@ -23,20 +23,20 @@ def parsing(str):
     str = despace(str)
     str = str.replace("x", "X")
     if str.count("=") != 1:
-            print("CONNARD! 1")
+            print("you must put one equal")
             quit()
     i = 0
     for char in str:
         if is_operator(char) == False and char.isdigit() == False \
             and char != "X" and char != " " and char != "=" and char != ".":
-            print("CONNARD! 2")
+            print("you put a wrong character")
             quit()
         if char == "^" and i < len(str) - 2 and (str[i + 1] == "X" or str[i + 2] == "X"):
-            print("CONNARD! 3")
+            print("we cannot resolve an equation with a power equal to X")
             quit()
         if char == "." and (i <= 0 or i >= len(str) - 1 \
             or str[i - 1].isdigit() == False or str[i + 1] == False):
-            print("CONNARD! 4")
+            print("put only a point for decimal number")
             quit()
         i += 1
 
@@ -46,20 +46,20 @@ def parsing(str):
     for token in str_split:
         if i % 2 == 0:
             if is_operator(token) == True or token == "=":
-                print("CONNARD! 6")
+                print("put your operator correctly")
                 quit()
         if i % 2 == 1:
             if is_operator(token) == False and token != "=" \
                 or token == "^":
-                print("CONNARD! 5")
+                print("put your number correctly")
                 quit()
         if i == len(str_split):
             if token == "=":
-                print("CONNARD! 7")
+                print("CONNARD! 8")
                 quit()
         i += 1
     if str_split[i - 1] == "=":
-        print("CONNARD! 8")
+        print("put something after the equal")
         quit()
     str = Xformatting(str)
     return str

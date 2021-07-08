@@ -14,7 +14,7 @@ from resolve_equation import (
 main function, leakser and algo start here with different functions call
 """
 if len(sys.argv) < 2:
-    print("tk1kon! 1")
+    print("you don't have enough argument")
     quit()
 elif len(sys.argv) == 2:
     if sys.argv[1] == "-h":
@@ -27,14 +27,14 @@ elif len(sys.argv) == 3:
             print("Ceci est un HELP")
             quit()
         elif "n" not in sys.argv[1] and "f" not in sys.argv[1]:
-            print("tk1kon! 3")
+            print("you put a wrong option")
             quit()
     else:
-        print("tk1kon! 4")
+        print("Ceci est un HELP")
         quit()
     equation = parsing(sys.argv[2])
 else:
-    print("tk1kon! 2")
+    print("you have too much argument")
     quit()
     
 reduced_form = reduce_equation(equation)
@@ -61,8 +61,8 @@ print("Reduced form :", reduced_form_print)
 print("Polynomial degre :", polynomial_degree)
 
 if polynomial_degree == 2:
-    resolve_degree_2(reduced_form)
+    resolve_degree_2(reduced_form, sys.argv[1][1:])
 elif polynomial_degree == 1:
-    resolve_degree_1(reduced_form)
+    resolve_degree_1(reduced_form, sys.argv[1][1:])
 elif polynomial_degree == 0:
     resolve_degree_0(reduced_form, equation)
