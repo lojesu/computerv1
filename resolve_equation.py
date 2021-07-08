@@ -1,4 +1,4 @@
-from parsing import is_operator
+from tools import is_operator
 
 
 """
@@ -33,10 +33,10 @@ def number_to_fraction(solution):
     solution_print = solution
     if solution % 1 == 0:
         return solution
-    while solution_print % 1 != 0 and i < 1000:
+    while solution_print % 1 != 0 and i < 10000:
         i += 1
         solution_print = solution * i
-    if i >= 1000:
+    if i >= 10000:
         return solution
     else:
         return str(int(solution_print)) + "/" + str(i)

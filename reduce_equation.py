@@ -1,17 +1,8 @@
-from parsing import is_operator
-
-"""
-return second element of elem
-"""
-def take_second(elem):
-    return elem[1]
-
-
-"""
-return first element of elem
-"""
-def take_first(elem):
-    return elem[0]
+from tools import (
+    take_first,
+    take_second,
+    is_operator,
+    )
 
 
 """

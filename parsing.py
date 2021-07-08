@@ -1,10 +1,4 @@
-"""
-function for determinate if the tokken is an operator
-"""
-def is_operator(token):
-    if token == "+" or token == "-" or token =="*" or token == "/" or token == "^":
-        return True
-    return False
+from tools import is_operator
 
 
 """
@@ -53,14 +47,11 @@ def parsing(str):
                 or token == "^":
                 print("put your number correctly")
                 quit()
-        if i == len(str_split):
+        if i == len(str_split) - 1:
             if token == "=":
-                print("CONNARD! 8")
+                print("put something after the equal")
                 quit()
         i += 1
-    if str_split[i - 1] == "=":
-        print("put something after the equal")
-        quit()
     str = Xformatting(str)
     return str
 
