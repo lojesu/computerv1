@@ -56,21 +56,20 @@ def transfer_all_token_to_the_left_equal(equation):
         if i % 2 == 0:
             if i == 0:
                 if is_number(token):
-                    if int(token) * -1 >= 0:
-                        new_right_equal += "+ " + str(int(token) * -1)
+                    if float(token) < 0:
+                        new_right_equal += "+ " + str(float(token) * -1)
                     else:
-                        new_right_equal += "- " + token
+                        new_right_equal += "+ " + str(float(token) * -1)
                 elif token[0] == "X" or token[1] == "X":
                     if token[0] == "-":
-                        new_right_equal += "+ "
+                        new_right_equal += "+ " + token
                     else:
-                        new_right_equal += "- "
-                    new_right_equal += token
+                        new_right_equal += "- " + token
             else:
                 if token.isdigit() and \
                     (right_equal_split[i - 1] != "+" and \
                     right_equal_split[i - 1] != "-"):
-                    new_right_equal += str(int(token) * -1)
+                    new_right_equal += str(float(token) * -1)
                 else:
                     new_right_equal += token
         elif i % 2 == 1:
@@ -84,6 +83,7 @@ def transfer_all_token_to_the_left_equal(equation):
         new_right_equal += " "
     new_equation = left_equal + new_right_equal + "= 0"
     return new_equation
+
 
 """
 this is the first step of final reduction of equation, i develope all * and /
@@ -145,11 +145,19 @@ def reduction_second_step(equation):
             start -= 2
         start += 2
     i = 0
-    for token in equation:
-        if take_first(token) == 0 and take_second(token) == 0:
-            del(equation[i])
-            del(equation[i])
+    while i < len(equation):
+        if take_first(equation[i]) == 0:
+            if i == 0:
+                del(equation[i])
+                if i < len(equation) - 1:
+                    del(equation[i])
+            else:
+                del(equation[i - 1])
+                del(equation[i - 1])
+            i -= 1
         i += 1
+    if len(equation) == 0:
+        equation.append((0, 0))
     return equation
 
 
