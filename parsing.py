@@ -51,6 +51,9 @@ def parsing(str):
             if token == "=":
                 print("put something after the equal")
                 quit()
+            elif is_operator(token) == True:
+                print("you can't finish your equation with an operator")
+                quit()
         i += 1
     str = Xformatting(str)
     return str
@@ -76,8 +79,12 @@ def formatting(str):
     i = 0
     for char in str:
         if char == "-":
-            if str[i + 1].isdigit() or str[i + 1] == "X":
-                new_str += char
+            if i < len(str) - 1 and (str[i + 1].isdigit() or str[i + 1] == "X"):
+                if (i > 0 and is_operator(str[i - 1]) == True) or \
+                    (i > 1 and str[i - 1] == " " and is_operator(str[i - 2]) == True):
+                    new_str += char
+                else:
+                    new_str += char + " "
             else:
                 new_str += char + " "
         elif char.isdigit() or char == ".":
