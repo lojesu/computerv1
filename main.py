@@ -9,6 +9,15 @@ from resolve_equation import (
     resolve_degree_2
 )
 
+"""
+function for print the helper
+"""
+def print_helper():
+    print("USAGE: python3 main.py [OPTIONS] [OPERATION]\n")
+    print("OPRIONS:")
+    print("\t-n\tfor simplify reduced form display")
+    print("\t-f\twrite the result as fraction if possible")
+    print("\t-h\tdisplay help information\n")
 
 """
 main function, leakser and algo start here with different functions call
@@ -18,19 +27,19 @@ if len(sys.argv) < 2:
     quit()
 elif len(sys.argv) == 2:
     if sys.argv[1] == "-h":
-        print("Ceci est un HELP")
+        print_helper()
         quit()
     equation = parsing(sys.argv[1])
 elif len(sys.argv) == 3:
     if len(sys.argv[1]) > 0 and sys.argv[1][0] == "-":
         if "h" in sys.argv[1]:
-            print("Ceci est un HELP")
+            print_helper()
             quit()
         elif "n" not in sys.argv[1] and "f" not in sys.argv[1]:
             print("you put a wrong option")
             quit()
     else:
-        print("Ceci est un HELP")
+        print_helper()
         quit()
     equation = parsing(sys.argv[2])
 else:

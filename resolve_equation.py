@@ -33,7 +33,7 @@ def number_to_fraction(solution):
     solution_print = solution
     if solution % 1 == 0:
         return solution
-    while solution_print % 1 != 0 and i < 10000:
+    while solution_print % 1 != 0 and i < 1000000:
         i += 1
         solution_print = solution * i
     if i >= 10000:
