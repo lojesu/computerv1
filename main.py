@@ -6,7 +6,8 @@ from determinate_polynomial_degree import determinate_polynomial_degree
 from resolve_equation import (
     resolve_degree_0,
     resolve_degree_1,
-    resolve_degree_2
+    resolve_degree_2,
+    number_to_fraction
 )
 
 """
@@ -14,7 +15,7 @@ function for print the helper
 """
 def print_helper():
     print("USAGE: python3 main.py [OPTIONS] [OPERATION]\n")
-    print("OPRIONS:")
+    print("OPTIONS:")
     print("\t-n\tfor simplify reduced form display")
     print("\t-f\twrite the result as fraction if possible")
     print("\t-h\tdisplay help information\n")
@@ -58,7 +59,10 @@ for token in reduced_form:
         if int(token[0]) == 1:
             reduced_form_print += "X^" + str(int(token[1])) + " "
         else:
-            reduced_form_print += str(token[0]) + " * X^" + str(int(token[1])) + " "
+            if "n" in sys.argv[1]:
+                reduced_form_print += str(number_to_fraction(token[0])) + " * X^" + str(int(token[1])) + " "
+            else:
+                reduced_form_print += str(token[0]) + " * X^" + str(int(token[1])) + " "
     else:
         reduced_form_print += token + " "
 if "n" in sys.argv[1]:
